@@ -1,0 +1,22 @@
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        rows = [set() for x in range(9)]
+        cols = [set() for x in range(9)]
+        squares = [[set() for x in range(9)]for y in range(9)]
+
+        for x in range(9):
+            for y in range(9):
+                value = board[x][y]
+                if value == '.':
+                    continue
+                if value in rows[x] or value in cols[y] or value in squares[x//3][y//3]:
+                    return False
+
+                rows[x].add(value)
+                cols[y].add(value)
+                squares[x//3][y//3].add(value)
+        return True
